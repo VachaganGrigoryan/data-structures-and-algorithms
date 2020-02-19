@@ -170,14 +170,24 @@ class BeTree:
     def __str__(self):
         return str(self.root)
 
-    def to_list(self):
-        def _get_inorder(node):
+    def to_list(self, key='sort'):
+        def _tree(node):
             if node:
-                _get_inorder(node.left)
                 self.list.append(node.value)
-                _get_inorder(node.right)
-        self.list = []
-        _get_inorder(self.root)
+                _tree(node.left)
+                _tree(node.right)
+            
+        def _sort(node):
+            if node:
+                _sort(node.left)
+                self.list.append(node.value)
+                _sort(node.right)
+        try:
+            self.list = []
+            __func = eval(f'_{key}')
+            __func(self.root)
+        except NameError:
+            return self.list
         return self.list
 
     

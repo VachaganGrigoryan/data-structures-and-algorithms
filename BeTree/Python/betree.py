@@ -135,34 +135,49 @@ class BeTree:
     def __str__(self):
         return str(self.root)
 
-    def to_list(self):
-        def _get_inorder(node):
+    def to_list(self, key='sort'):
+        def _tree(node):
             if node:
-                _get_inorder(node.left)
                 self.list.append(node.value)
-                _get_inorder(node.right)
-        self.list = []
-        _get_inorder(self.root)
+                _tree(node.left)
+                _tree(node.right)
+            
+        def _sort(node):
+            if node:
+                _sort(node.left)
+                self.list.append(node.value)
+                _sort(node.right)
+        try:
+            self.list = []
+            __func = eval(f'_{key}')
+            __func(self.root)
+        except NameError:
+            return self.list
         return self.list   
 
 
 if __name__ == '__main__':
     
     tree = BeTree()
+    for num in [9, 5, 10, 0, 6, 11, -1, 1, 2]: 
+        tree.add(num)
+    # tree.add(13)
+    # tree.add(15)
+    # tree.add(10)
+    # tree.add(16)
+    # tree.add(11)
+    # tree.add(5)
+    # tree.add(4)
+    # tree.add(6)
+    # tree.add(7)
+    
+    tree.remove(10)
+    tree.remove(-1)
+    
+    # node = tree.find(13)
+    # print(BeTree.level(node.root))
 
-    tree.add(13)
-    tree.add(15)
-    tree.add(10)
-    tree.add(16)
-    tree.add(11)
-    tree.add(5)
-    tree.add(4)
-    tree.add(6)
-    tree.add(7)
-    
-    tree.remove(15)
-    tree.remove(5)
-    
-    print(tree)
+    print(tree.to_list('tree'))
+    print(tree.to_list())
     print(tree.level(tree.root))
     
