@@ -77,7 +77,7 @@ class BermudaTriangle(list):
             self[rate.x][rate.y] = '⚓'
             self.__ship.remove(rate)
         else:
-            if self[rate.x][rate.y] = '+':
+            if self[rate.x][rate.y] == '+':
                 self[rate.x][rate.y] = '◽'
             self.__compass(rate)
 
@@ -108,11 +108,12 @@ class BermudaTriangle(list):
 
     @staticmethod
     def __show_compass(note):
-        print(f"\nCompass:\n _____________\n{chr(10).join('|{:<2} {:^1} {:^3} {:^1} {:>2}|'.format(*line) for line in note)}\n ‾‾‾‾‾‾‾‾‾‾‾‾‾")
+        _step = '|{:<2} {:^1} {:^3} {:^1} {:>2}|'
+        print(f"\nCompass:\n {'_'*13}\n{chr(10).join(_step.format(*line) for line in note)}\n {'‾'*13}")
 
     def __win(self):
         self.show()
-        print("You Won")
+        print(f" {'_'*7}\n|You Win|\n {'‾'*7}")
 
     def show(self):
         print(self)
@@ -123,5 +124,6 @@ class BermudaTriangle(list):
 
 if __name__ == '__main__':
 
-    game = BermudaTriangle(9, 9, 4)
+    game = BermudaTriangle(20, 10, 8)
     game.run()
+
