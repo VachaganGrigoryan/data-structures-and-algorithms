@@ -77,7 +77,8 @@ class BermudaTriangle(list):
             self[rate.x][rate.y] = '⚓'
             self.__ship.remove(rate)
         else:
-            self[rate.x][rate.y] = '◽'
+            if self[rate.x][rate.y] = '+':
+                self[rate.x][rate.y] = '◽'
             self.__compass(rate)
 
     def __compass(self, rate):
