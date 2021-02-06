@@ -74,11 +74,11 @@ class BermudaTriangle(list):
 
     def __check(self, rate):
         if any(rate == cord for cord in self.__ship):
-            self[rate.x][rate.y] = '⚓'
+            self[rate.x][rate.y] = '\033[1;32m⚓\033[1;31m'
             self.__ship.remove(rate)
         else:
             if self[rate.x][rate.y] == '+':
-                self[rate.x][rate.y] = '◽'
+                self[rate.x][rate.y] = '\033[1;34m◽\033[1;31m'
             self.__compass(rate)
 
     def __compass(self, rate):
@@ -109,7 +109,7 @@ class BermudaTriangle(list):
     @staticmethod
     def __show_compass(note):
         _step = '|{:<2} {:^1} {:^3} {:^1} {:>2}|'
-        print(f"\nCompass:\n {'_'*13}\n{chr(10).join(_step.format(*line) for line in note)}\n {'‾'*13}")
+        print(f"\n\033[1;36mCompass:\n\033[1;32m {'_'*13}\n{chr(10).join(_step.format(*line) for line in note)}\n {'‾'*13}")
 
     def __win(self):
         self.show()
@@ -119,11 +119,9 @@ class BermudaTriangle(list):
         print(self)
 
     def __str__(self):
-        return f"\nGame Board\n{chr(10).join(' '.join(line) for line in zip(*self))}\n"
+        return f"\n\033[1;36mGame Board:\n\033[1;31m{chr(10).join(' '.join(line) for line in zip(*self))}\n\033[m"
 
 
 if __name__ == '__main__':
-
-    game = BermudaTriangle(20, 10, 8)
+    game = BermudaTriangle(10, 10, 5)
     game.run()
-
